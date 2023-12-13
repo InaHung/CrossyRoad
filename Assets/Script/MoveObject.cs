@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class MoveObject : IPoolable
 {
     public float moveSpeed; 
@@ -30,5 +30,17 @@ public class MoveObject : IPoolable
         }
 
     }
+    public void DisposeMyself()
+    {
+        DOVirtual.DelayedCall(10f, () =>
+        {
+            if (transform != null)
+                Dispose();
+
+
+        });
+    }
+   
+
 
 }

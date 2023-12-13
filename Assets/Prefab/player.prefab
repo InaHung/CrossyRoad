@@ -94,7 +94,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7595474930358924620}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -111,12 +111,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d5af0b0c1158e845b9576b1b7e889ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDistance: 10
+  moveUpDistance: 0
+  moveRightDistance: 0
   playerSensorRight: {fileID: 2087715020804375548, guid: 6f7c9d111bca81d4ba3f139e308cef1c, type: 3}
   playerSensorLeft: {fileID: 8049958968503478125, guid: 6609340684a4a2144a15a7dcfe98064a, type: 3}
   playerSensorUP: {fileID: 2371183087778334823, guid: f731764e36487bd46bbdee48d8df60f1, type: 3}
   playerSensorDown: {fileID: 3400661926403797488, guid: 6d557a8cb26ca384d85bd4bd9eedde63, type: 3}
-  carManufacturer: {fileID: 1930011092617862991, guid: 8750fc18021b7f84796033dca617a01e, type: 3}
+  uIManager: {fileID: 0}
 --- !u!54 &7595474930358924466
 Rigidbody:
   m_ObjectHideFlags: 0

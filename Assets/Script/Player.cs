@@ -9,12 +9,15 @@ public class Player : MonoBehaviour
     public float moveUpDistance;
     public float moveRightDistance;
     public Action OnPlayerMove;
+    public Action OnGetScore;
     public PlayerSensor playerSensorRight;
     public PlayerSensor playerSensorLeft;
     public PlayerSensor playerSensorUP;
     public PlayerSensor playerSensorDown;
     private Transform myParent;
-    
+    public UIManager uIManager;
+    float farPoint;
+    float i = 0;
     private void Awake()
     {
         myParent = transform.parent;
@@ -24,8 +27,8 @@ public class Player : MonoBehaviour
     void Update()
     {
        
-            PlayerMove();
-        
+        PlayerMove();
+       
        
        
     }
@@ -43,35 +46,67 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow) && playerSensorUP.canPass)
         {
             transform.position += new Vector3(0, 0, moveUpDistance);
+            GetPoint();
             OnPlayerMove();
+           
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow) && playerSensorDown.canPass)
+       if (Input.GetKeyDown(KeyCode.DownArrow) && playerSensorDown.canPass)
         {
             transform.position -= new Vector3(0, 0, moveUpDistance);
+           
+
         }
     }
     private void OnTriggerEnter(Collider collision)
     {
-        if(collision.tag=="wood")
+       if( collision.gameObject.tag == "barrier")
         {
-            transform.position = collision.GetComponent<Wood>().GetNearPosition(transform.position);
-            transform.SetParent(collision.transform);
-            
+            uIManager.EndGame();
+            transform.gameObject.SetActive(false);
         }
-        if(collision.tag=="barrier")
-        {
-
-        }
-       
-        
     }
     private void OnTriggerExit(Collider collision)
     {
-        if (collision.tag == "wood")
+        
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "wood")
         {
-           
+            transform.position = collision.gameObject.GetComponent<Wood>().GetNearPosition(transform.position);
+            transform.SetParent(collision.transform);
+
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+      
+        if (collision.gameObject.tag == "moveObject" || collision.gameObject.tag == "CameraCollider")
+        {
+            uIManager.EndGame();
+            transform.gameObject.SetActive(false);
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "wood")
+        {
+
             transform.SetParent(myParent);
 
         }
     }
+    public void GetPoint()
+    {
+       
+        farPoint = transform.position.z;
+        if (farPoint > i)
+        {
+            OnGetScore();
+            i=farPoint;
+        }
+           
+    }
+       
 }
