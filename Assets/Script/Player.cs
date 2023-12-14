@@ -16,8 +16,13 @@ public class Player : MonoBehaviour
     public PlayerSensor playerSensorDown;
     private Transform myParent;
     public UIManager uIManager;
+    public Rigidbody rigidbody;
     float farPoint;
     float i = 0;
+
+    public float gravityScale = 5.0f;
+    public static float globalGravity = -9.81f;
+
     private void Awake()
     {
         myParent = transform.parent;
@@ -26,17 +31,23 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-       
+
         PlayerMove();
-       
-       
-       
+
+
+
+    }
+
+    private void FixedUpdate()
+    {
+        Vector3 gravity = globalGravity * gravityScale * Vector3.up;
+        rigidbody.AddForce(gravity, ForceMode.Acceleration);
     }
     void PlayerMove()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow)&& playerSensorRight.canPass)
+        if (Input.GetKeyDown(KeyCode.RightArrow) && playerSensorRight.canPass)
         {
-                transform.position += new Vector3(moveRightDistance, 0, 0);
+            transform.position += new Vector3(moveRightDistance, 0, 0);
         }
 
         if (Input.GetKeyDown(KeyCode.LeftArrow) && playerSensorLeft.canPass)
@@ -48,18 +59,18 @@ public class Player : MonoBehaviour
             transform.position += new Vector3(0, 0, moveUpDistance);
             GetPoint();
             OnPlayerMove();
-           
+
         }
-       if (Input.GetKeyDown(KeyCode.DownArrow) && playerSensorDown.canPass)
+        if (Input.GetKeyDown(KeyCode.DownArrow) && playerSensorDown.canPass)
         {
             transform.position -= new Vector3(0, 0, moveUpDistance);
-           
+
 
         }
     }
     private void OnTriggerEnter(Collider collision)
     {
-       if( collision.gameObject.tag == "barrier"|| collision.gameObject.tag == "dieCollider")
+        if (collision.gameObject.tag == "barrier" || collision.gameObject.tag == "dieCollider")
         {
             uIManager.EndGame();
             transform.gameObject.SetActive(false);
@@ -67,7 +78,7 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerExit(Collider collision)
     {
-        
+
     }
 
     private void OnCollisionStay(Collision collision)
@@ -81,15 +92,15 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-      
-        if (collision.gameObject.tag == "moveObject" || collision.gameObject.tag == "CameraCollider"||collision.gameObject.tag=="tree")
+
+        if (collision.gameObject.tag == "moveObject" || collision.gameObject.tag == "CameraCollider" || collision.gameObject.tag == "tree")
         {
             uIManager.EndGame();
             transform.gameObject.SetActive(false);
         }
-       if(collision.gameObject.tag=="riverPlane")
+        if (collision.gameObject.tag == "riverPlane")
         {
-            transform.position = collision.transform.position;
+            transform.position = collision.transform.position + new Vector3(0, 2.5f, 0);
         }
     }
     private void OnCollisionExit(Collision collision)
@@ -103,14 +114,14 @@ public class Player : MonoBehaviour
     }
     public void GetPoint()
     {
-       
+
         farPoint = transform.position.z;
         if (farPoint > i)
         {
             OnGetScore();
-            i=farPoint;
+            i = farPoint;
         }
-           
+
     }
-       
+
 }
