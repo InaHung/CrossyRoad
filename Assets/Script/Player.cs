@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerEnter(Collider collision)
     {
-       if( collision.gameObject.tag == "barrier")
+       if( collision.gameObject.tag == "barrier"|| collision.gameObject.tag == "dieCollider")
         {
             uIManager.EndGame();
             transform.gameObject.SetActive(false);
@@ -82,10 +82,14 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
       
-        if (collision.gameObject.tag == "moveObject" || collision.gameObject.tag == "CameraCollider")
+        if (collision.gameObject.tag == "moveObject" || collision.gameObject.tag == "CameraCollider"||collision.gameObject.tag=="tree")
         {
             uIManager.EndGame();
             transform.gameObject.SetActive(false);
+        }
+       if(collision.gameObject.tag=="riverPlane")
+        {
+            transform.position = collision.transform.position;
         }
     }
     private void OnCollisionExit(Collision collision)

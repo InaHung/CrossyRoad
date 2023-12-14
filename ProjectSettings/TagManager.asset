@@ -7,6 +7,12 @@ TagManager:
   - barrier
   - wood
   - plane
+  - CameraCollider
+  - moveObject
+  - player
+  - riverPlane
+  - tree
+  - dieCollider
   layers:
   - Default
   - TransparentFX

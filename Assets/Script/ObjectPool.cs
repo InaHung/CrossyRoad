@@ -31,7 +31,7 @@ public class ObjectPool : MonoBehaviour
             return obj;
         }
         else
-        {   
+        {
             IPoolable obj = Instantiate(prefab);
             obj.SetupPool(this);
             return obj;
@@ -42,15 +42,14 @@ public class ObjectPool : MonoBehaviour
 
 
 
-   
+
 
     public void RecyclePoolObject(IPoolable obj)
     {
-       
         obj.gameObject.SetActive(false);
         objectPool.Enqueue(obj);
 
     }
 
-   
+
 }

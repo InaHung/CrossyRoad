@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{79EE8C97-1E49-5C73-F539-293C8D1D348A}</ProjectGuid>
+    <ProjectGuid>{5516D57E-4EC1-412B-47B7-66ABB221910C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -66,9 +66,12 @@
     <Compile Include="Assets\Tween\Tween.cs" />
     <Compile Include="Assets\Script\PlayerSensor.cs" />
     <Compile Include="Assets\Script\MoveObject.cs" />
+    <Compile Include="Assets\Script\Scene.cs" />
+    <Compile Include="Assets\Script\UIManager.cs" />
     <Compile Include="Assets\Script\ObjectPool.cs" />
     <Compile Include="Assets\Script\Camera.cs" />
-    <Compile Include="Assets\Script\UIManager.cs" />
+    <Compile Include="Assets\Test\CubeA.cs" />
+    <Compile Include="Assets\Test\CubeB.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -800,7 +803,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{ADAC3D87-E56E-D480-7EE7-F92131AD4A50}</Project>
+      <Project>{EC817BF3-798D-AC35-0E73-D7C1B7FD4001}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
   </ItemGroup>
